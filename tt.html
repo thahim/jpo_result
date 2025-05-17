@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TikTok Swiper</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: black;
+    }
+    iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe id="videoFrame" allowfullscreen></iframe>
+
+  <script>
+    const videos = [
+      "https://vt.tiktok.com/ZSh4hvpf1/",
+      "https://vt.tiktok.com/ZSh4hK8YK/",
+      "https://vt.tiktok.com/ZSh4hEWhw/",
+      "https://vt.tiktok.com/ZSh4kdosB/",
+      "https://vt.tiktok.com/ZSh4kACp9/",
+      "https://vt.tiktok.com/ZSh4kp77K/",
+      "https://vt.tiktok.com/ZSh4kQeaR/",
+      "https://vt.tiktok.com/ZSh4k5wBm/",
+      "https://vt.tiktok.com/ZSh4kS9dw/",
+      "https://vt.tiktok.com/ZSh4kSMBe/",
+      "https://vt.tiktok.com/ZSh4kbYNu/",
+      "https://vt.tiktok.com/ZSh4k4E8w/",
+      "https://vt.tiktok.com/ZSh4kyweM/",
+      "https://vt.tiktok.com/ZSh4kDNym/",
+      "https://vt.tiktok.com/ZSh4kxfV6/",
+      "https://vt.tiktok.com/ZSh4kuHxr/",
+      "https://vt.tiktok.com/ZSh4kXbUN/",
+      "https://vt.tiktok.com/ZSh4kmDE2/",
+      "https://vt.tiktok.com/ZSh4kPRgs/",
+      "https://vt.tiktok.com/ZSh4kDwh7/",
+      "https://vt.tiktok.com/ZSh4kpB7t/",
+      "https://vt.tiktok.com/ZSh4kxvTk/",
+      "https://vt.tiktok.com/ZSh4k9Hr3/",
+      "https://vt.tiktok.com/ZSh4kDQQy/",
+      "https://vt.tiktok.com/ZSh4kPwKd/",
+      "https://vt.tiktok.com/ZSh4kb5Mu/",
+      "https://vt.tiktok.com/ZSh4kA2oJ/",
+      "https://vt.tiktok.com/ZSh4kVa7U/",
+      "https://vt.tiktok.com/ZSh4kyvSo/",
+      "https://vt.tiktok.com/ZSh4kyJtU/",
+      "https://vt.tiktok.com/ZSh4k9fR1/",
+      "https://vt.tiktok.com/ZSh4kg3Ar/",
+      "https://vt.tiktok.com/ZSh4kmFDD/"
+    ];
+
+    const frame = document.getElementById("videoFrame");
+
+    function loadRandomVideo() {
+      const randomUrl = videos[Math.floor(Math.random() * videos.length)];
+      frame.src = randomUrl;
+    }
+
+    loadRandomVideo();
+
+    // Swipe detection
+    let startY = null;
+
+    window.addEventListener("touchstart", e => {
+      startY = e.touches[0].clientY;
+    });
+
+    window.addEventListener("touchend", e => {
+      if (startY === null) return;
+      const endY = e.changedTouches[0].clientY;
+      if (Math.abs(endY - startY) > 50) loadRandomVideo();
+      startY = null;
+    });
+
+    // Arrow key support
+    window.addEventListener("keydown", e => {
+      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+        loadRandomVideo();
+      }
+    });
+  </script>
+</body>
+</html>
